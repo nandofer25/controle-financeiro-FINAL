@@ -1,0 +1,250 @@
+### IntelliJ HTTP Client - rode a aplicacao e clique no triangulo verde de cada requisicao
+
+### 1) POST - cria uma receita (201 Created)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Salario",
+  "valor": 3500.00,
+  "tipo": "RECEITA",
+  "categoria": "Trabalho"
+}
+
+### 2) POST - cria uma despesa acima do limite (gera ALERTA DE GASTO no log)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Aluguel",
+  "valor": 1200.00,
+  "tipo": "DESPESA",
+  "categoria": "Moradia"
+}
+
+### 3) GET - lista tudo (200 OK)
+GET http://localhost:8080/transacoes
+
+### 4) GET por id existente (200 OK)
+GET http://localhost:8080/transacoes/1
+
+### 5) GET por id inexistente (404 Not Found + ERRO no log)
+GET http://localhost:8080/transacoes/999
+
+### 6) PUT - atualiza (200 OK)
+PUT http://localhost:8080/transacoes/2
+Content-Type: application/json
+
+{
+  "descricao": "Aluguel (reajustado)",
+  "valor": 1300.00,
+  "tipo": "DESPESA",
+  "categoria": "Moradia"
+}
+
+### 7) PUT inexistente (404)
+PUT http://localhost:8080/transacoes/999
+Content-Type: application/json
+
+{
+  "descricao": "Teste",
+  "valor": 10.00,
+  "tipo": "DESPESA"
+}
+
+### 8) DELETE (204 No Content)
+DELETE http://localhost:8080/transacoes/2
+
+### 9) DELETE inexistente (404)
+DELETE http://localhost:8080/transacoes/999
+
+### 10) Resumo (receitas, despesas, saldo, alertaGasto)
+GET http://localhost:8080/transacoes/resumo
+
+### 11) Validacao (400 Bad Request + ERRO no log)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "",
+  "valor": -5,
+  "tipo": "DESPESA"
+}
+
+
+### ===== CEP (Adapter + Proxy) =====
+
+### 12) CEP valido - 1a vez: log "veio do PROVEDOR" (200 OK)
+GET http://localhost:8080/cep/01001000
+
+### 13) Mesmo CEP - 2a vez: log "veio do CACHE" (200 OK)
+GET http://localhost:8080/cep/01001000
+
+### 14) Outro CEP valido (200 OK)
+GET http://localhost:8080/cep/89010025
+
+### 15) Formato invalido - BLOQUEADO pelo Proxy, provedor nao e chamado (400)
+GET http://localhost:8080/cep/123
+
+### 16) Formato invalido com hifen (400)
+GET http://localhost:8080/cep/01001-000
+
+### 17) CEP bem formado mas inexistente (404)
+GET http://localhost:8080/cep/99999999
+
+
+### ===== ORCAMENTO POR CATEGORIA (Strategy + Observer + State) =====
+### As transacoes abaixo usam "data" explicita (novembro/2026) para casar com os orcamentos de 11/2026.
+
+### 18) Orcamento FIXO: Alimentacao R$ 1000 em 11/2026 (201 Created, status NORMAL) - Strategy LimiteFixo
+POST http://localhost:8080/orcamentos
+Content-Type: application/json
+
+{
+  "categoria": "Alimentacao",
+  "ano": 2026,
+  "mes": 11,
+  "tipoLimite": "FIXO",
+  "valorLimite": 1000.00
+}
+
+### 19) Orcamento PERCENTUAL: Lazer = 10% das receitas do mes (201 Created) - Strategy LimitePercentualReceita
+POST http://localhost:8080/orcamentos
+Content-Type: application/json
+
+{
+  "categoria": "Lazer",
+  "ano": 2026,
+  "mes": 11,
+  "tipoLimite": "PERCENTUAL_DA_RECEITA",
+  "valorLimite": 10
+}
+
+### 20) Receita do mes (Observer reavalia os orcamentos percentuais: limite do Lazer passa a acompanhar a renda)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Salario novembro",
+  "valor": 5000.00,
+  "tipo": "RECEITA",
+  "categoria": "Trabalho",
+  "data": "2026-11-05"
+}
+
+### 21) Despesa 700 em Alimentacao -> continua NORMAL (700/1000)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Mercado",
+  "valor": 700.00,
+  "tipo": "DESPESA",
+  "categoria": "Alimentacao",
+  "data": "2026-11-10"
+}
+
+### 22) Despesa 150 -> 850/1000: NORMAL -> ATENCAO (State) e gera alerta (veja o app.log e o GET /alertas)
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Feira",
+  "valor": 150.00,
+  "tipo": "DESPESA",
+  "categoria": "Alimentacao",
+  "data": "2026-11-12"
+}
+
+### 23) Despesa 300 -> 1150/1000: ATENCAO -> ESTOURADO e novo alerta
+POST http://localhost:8080/transacoes
+Content-Type: application/json
+
+{
+  "descricao": "Churrasco",
+  "valor": 300.00,
+  "tipo": "DESPESA",
+  "categoria": "Alimentacao",
+  "data": "2026-11-15"
+}
+
+### 24) Consulta o orcamento (limiteEfetivo, consumido, restante, percentualConsumido e status)
+GET http://localhost:8080/orcamentos/1
+
+### 25) Alertas gerados (mais recentes primeiro)
+GET http://localhost:8080/alertas
+
+### 26) Lista orcamentos de 11/2026
+GET http://localhost:8080/orcamentos?ano=2026&mes=11
+
+### 27) Encerra o orcamento (200 OK, status ENCERRADO)
+POST http://localhost:8080/orcamentos/1/encerrar
+
+### 28) Encerrar de novo -> operacao incompativel com o estado (409 Conflict + ERRO no log)
+POST http://localhost:8080/orcamentos/1/encerrar
+
+### 29) Alterar limite de orcamento encerrado (409 Conflict)
+PUT http://localhost:8080/orcamentos/1/limite
+Content-Type: application/json
+
+{
+  "tipoLimite": "FIXO",
+  "valorLimite": 2000.00
+}
+
+### 30) Reabre o orcamento (200 OK; o status e recalculado com os lancamentos do periodo)
+POST http://localhost:8080/orcamentos/1/reabrir
+
+### 31) Reabrir orcamento que ja esta aberto (409 Conflict)
+POST http://localhost:8080/orcamentos/1/reabrir
+
+### 32) Altera o limite para um valor maior (200 OK; o State reavalia: ESTOURADO -> ATENCAO ou NORMAL)
+PUT http://localhost:8080/orcamentos/1/limite
+Content-Type: application/json
+
+{
+  "tipoLimite": "FIXO",
+  "valorLimite": 1300.00
+}
+
+### 33) Orcamento duplicado (mesma categoria e mes) -> 409 Conflict
+POST http://localhost:8080/orcamentos
+Content-Type: application/json
+
+{
+  "categoria": "alimentacao",
+  "ano": 2026,
+  "mes": 11,
+  "tipoLimite": "FIXO",
+  "valorLimite": 500.00
+}
+
+### 34) Percentual acima de 100 (regra de negocio) -> 400 Bad Request
+POST http://localhost:8080/orcamentos
+Content-Type: application/json
+
+{
+  "categoria": "Transporte",
+  "ano": 2026,
+  "mes": 11,
+  "tipoLimite": "PERCENTUAL_DA_RECEITA",
+  "valorLimite": 150
+}
+
+### 35) Validacao de formato (mes 13, categoria vazia) -> 400 Bad Request
+POST http://localhost:8080/orcamentos
+Content-Type: application/json
+
+{
+  "categoria": "",
+  "ano": 2026,
+  "mes": 13,
+  "tipoLimite": "FIXO",
+  "valorLimite": 100.00
+}
+
+### 36) Orcamento inexistente (404 Not Found)
+GET http://localhost:8080/orcamentos/999
+
+### 37) Exclui o orcamento de Lazer (204 No Content)
+DELETE http://localhost:8080/orcamentos/2

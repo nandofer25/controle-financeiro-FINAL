@@ -1,0 +1,109 @@
+2026-10-28 01:19:20.687 [INFO] [main] ControleFinanceiroApplication - Iniciando Sistema de Controle Financeiro
+2026-10-28 01:19:20.691 [DEBUG] [main] TransacaoController - POST /transacoes recebido
+2026-10-28 01:19:20.692 [DEBUG] [main] TransacaoService - Criando transacao: tipo=RECEITA, categoria=Trabalho, valor=3500.00
+2026-10-28 01:19:20.692 [INFO] [main] TransacaoService - Transacao criada com sucesso: id=1
+2026-10-28 01:19:20.692 [INFO] [main] TransacaoController - POST /transacoes -> 201 Created (id=1)
+2026-10-28 01:19:20.692 [DEBUG] [main] TransacaoController - POST /transacoes recebido
+2026-10-28 01:19:20.692 [DEBUG] [main] TransacaoService - Criando transacao: tipo=DESPESA, categoria=Moradia, valor=1200.00
+2026-10-28 01:19:20.693 [INFO] [main] TransacaoService - ALERTA DE GASTO: despesa id=2 (1200.00) acima do limite de 500.00
+2026-10-28 01:19:20.693 [INFO] [main] TransacaoService - Transacao criada com sucesso: id=2
+2026-10-28 01:19:20.693 [INFO] [main] TransacaoController - POST /transacoes -> 201 Created (id=2)
+2026-10-28 01:19:20.693 [DEBUG] [main] TransacaoController - GET /transacoes recebido
+2026-10-28 01:19:20.693 [DEBUG] [main] TransacaoService - Listando todas as transacoes
+2026-10-28 01:19:20.693 [INFO] [main] TransacaoService - Listagem concluida: 2 transacao(oes)
+2026-10-28 01:19:20.693 [INFO] [main] TransacaoController - GET /transacoes -> 200 OK (2 itens)
+2026-10-28 01:19:20.693 [DEBUG] [main] TransacaoController - GET /transacoes/1 recebido
+2026-10-28 01:19:20.693 [DEBUG] [main] TransacaoService - Buscando transacao por id=1
+2026-10-28 01:19:20.694 [INFO] [main] TransacaoService - Transacao encontrada: id=1
+2026-10-28 01:19:20.694 [INFO] [main] TransacaoController - GET /transacoes/1 -> 200 OK
+2026-10-28 01:19:20.694 [DEBUG] [main] TransacaoController - GET /transacoes/999 recebido
+2026-10-28 01:19:20.694 [DEBUG] [main] TransacaoService - Buscando transacao por id=999
+2026-10-28 01:19:20.694 [ERRO] [main] TransacaoService - Transacao nao encontrada: id=999
+2026-10-28 01:19:20.694 [ERRO] [main] TransacaoController - GET /transacoes/999 -> 404 Not Found
+2026-10-28 01:19:20.694 [DEBUG] [main] TransacaoController - PUT /transacoes/2 recebido
+2026-10-28 01:19:20.695 [DEBUG] [main] TransacaoService - Atualizando transacao id=2 com tipo=DESPESA, valor=1300.00
+2026-10-28 01:19:20.695 [INFO] [main] TransacaoService - ALERTA DE GASTO: despesa id=2 (1300.00) acima do limite de 500.00
+2026-10-28 01:19:20.695 [INFO] [main] TransacaoService - Transacao atualizada com sucesso: id=2
+2026-10-28 01:19:20.695 [INFO] [main] TransacaoController - PUT /transacoes/2 -> 200 OK
+2026-10-28 01:19:20.695 [DEBUG] [main] TransacaoController - PUT /transacoes/999 recebido
+2026-10-28 01:19:20.695 [DEBUG] [main] TransacaoService - Atualizando transacao id=999 com tipo=DESPESA, valor=10.00
+2026-10-28 01:19:20.695 [ERRO] [main] TransacaoService - Nao foi possivel atualizar, transacao nao encontrada: id=999
+2026-10-28 01:19:20.696 [ERRO] [main] TransacaoController - PUT /transacoes/999 -> 404 Not Found
+2026-10-28 01:19:20.696 [DEBUG] [main] TransacaoController - DELETE /transacoes/2 recebido
+2026-10-28 01:19:20.696 [DEBUG] [main] TransacaoService - Excluindo transacao id=2
+2026-10-28 01:19:20.696 [INFO] [main] TransacaoService - Transacao excluida com sucesso: id=2
+2026-10-28 01:19:20.697 [INFO] [main] TransacaoController - DELETE /transacoes/2 -> 204 No Content
+2026-10-28 01:19:20.697 [DEBUG] [main] TransacaoController - DELETE /transacoes/999 recebido
+2026-10-28 01:19:20.697 [DEBUG] [main] TransacaoService - Excluindo transacao id=999
+2026-10-28 01:19:20.697 [ERRO] [main] TransacaoService - Nao foi possivel excluir, transacao nao encontrada: id=999
+2026-10-28 01:19:20.698 [ERRO] [main] TransacaoController - DELETE /transacoes/999 -> 404 Not Found
+2026-10-28 01:19:20.698 [DEBUG] [main] TransacaoController - GET /transacoes/resumo recebido
+2026-10-28 01:19:20.698 [DEBUG] [main] TransacaoService - Calculando resumo financeiro
+2026-10-28 01:19:20.698 [INFO] [main] TransacaoService - Resumo financeiro calculado: saldo=3500.00
+2026-10-28 01:19:20.698 [INFO] [main] TransacaoController - GET /transacoes/resumo -> 200 OK
+2026-10-28 01:19:20.699 [ERRO] [main] GlobalExceptionHandler - Requisicao invalida (400). Campos com erro: [descricao, valor]
+2026-11-24 20:37:08.158 [DEBUG] [main] ViaCepAdapter - [Adapter] consultando a ViaCEP
+2026-11-24 20:37:08.201 [INFO] [main] ViaCepAdapter - [Adapter] ViaCEP informou que o CEP nao existe
+2026-11-24 20:37:08.202 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.216 [DEBUG] [main] ViaCepAdapter - [Adapter] consultando a ViaCEP
+2026-11-24 20:37:08.221 [INFO] [main] ViaCepAdapter - [Adapter] JSON da ViaCEP traduzido para Endereco
+2026-11-24 20:37:08.242 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.246 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do PROVEDOR e foi guardada no cache (1 no cache)
+2026-11-24 20:37:08.247 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 89010025 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.248 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 89010025 -> resposta veio do PROVEDOR e foi guardada no cache (2 no cache)
+2026-11-24 20:37:08.311 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.376 [INFO] [main] BrasilApiAdapter - [Adapter] JSON da BrasilAPI traduzido para Endereco
+2026-11-24 20:37:08.390 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.391 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.392 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.392 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.392 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.394 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.394 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.394 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.394 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.396 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.405 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.406 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do PROVEDOR e foi guardada no cache (1 no cache)
+2026-11-24 20:37:08.407 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do CACHE
+2026-11-24 20:37:08.407 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do CACHE
+2026-11-24 20:37:08.417 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 99999999 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.419 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 99999999 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.424 [DEBUG] [main] ViaCepAdapter - [Adapter] consultando a ViaCEP
+2026-11-24 20:37:08.430 [INFO] [main] ViaCepAdapter - [Adapter] JSON da ViaCEP traduzido para Endereco
+2026-11-24 20:37:08.431 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.432 [INFO] [main] BrasilApiAdapter - [Adapter] JSON da BrasilAPI traduzido para Endereco
+2026-11-24 20:37:08.435 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.440 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.444 [INFO] [main] BrasilApiAdapter - [Adapter] JSON da BrasilAPI traduzido para Endereco
+2026-11-24 20:37:08.445 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do PROVEDOR e foi guardada no cache (1 no cache)
+2026-11-24 20:37:08.446 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 01001000 -> resposta veio do CACHE
+2026-11-24 20:37:08.448 [INFO] [main] ConsultaCepProxy - [Proxy] CEP 99999999 nao esta no cache -> consultando o PROVEDOR
+2026-11-24 20:37:08.449 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.450 [ERRO] [main] ConsultaCepProxy - [Proxy] CEP BLOQUEADO: formato invalido (esperado: 8 digitos). Provedor nao foi chamado
+2026-11-24 20:37:08.457 [DEBUG] [main] ViaCepAdapter - [Adapter] consultando a ViaCEP
+2026-11-24 20:37:08.467 [INFO] [main] ViaCepAdapter - [Adapter] ViaCEP informou que o CEP nao existe
+2026-11-24 20:37:08.477 [DEBUG] [main] ViaCepAdapter - [Adapter] consultando a ViaCEP
+2026-11-24 20:37:08.480 [ERRO] [main] ViaCepAdapter - [Adapter] resposta da ViaCEP ilegivel | causa: JsonParseException: Unexpected character ('<' (code 60)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
+2026-11-24 20:37:08.481 [DEBUG] [main] BrasilApiAdapter - [Adapter] consultando a BrasilAPI
+2026-11-24 20:37:08.482 [ERRO] [main] BrasilApiAdapter - [Adapter] resposta da BrasilAPI ilegivel | causa: JsonParseException: Unrecognized token 'nao': was expecting (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 4]
+2026-11-24 20:37:08.512 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30d800
+2026-11-24 20:37:08.514 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30dc00
+2026-11-24 20:37:08.517 [DEBUG] [main] PublicadorTransacao - [Observer] evento CRIADA (transacao id=1) para 2 observador(es)
+2026-11-24 20:37:08.523 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30e000
+2026-11-24 20:37:08.525 [DEBUG] [main] PublicadorTransacao - [Observer] evento CRIADA (transacao id=1) para 1 observador(es)
+2026-11-24 20:37:08.528 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30e400
+2026-11-24 20:37:08.533 [DEBUG] [main] PublicadorTransacao - [Observer] evento CRIADA (transacao id=1) para 1 observador(es)
+2026-11-24 20:37:08.534 [DEBUG] [main] PublicadorTransacao - [Observer] observador removido: PublicadorTransacaoTest$$Lambda/0x000000003a30e400
+2026-11-24 20:37:08.535 [DEBUG] [main] PublicadorTransacao - [Observer] evento CRIADA (transacao id=1) para 0 observador(es)
+2026-11-24 20:37:08.544 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30e800
+2026-11-24 20:37:08.545 [DEBUG] [main] PublicadorTransacao - [Observer] observador registrado: PublicadorTransacaoTest$$Lambda/0x000000003a30ec00
+2026-11-24 20:37:08.547 [DEBUG] [main] PublicadorTransacao - [Observer] evento CRIADA (transacao id=1) para 2 observador(es)
+2026-11-24 20:37:08.548 [ERRO] [main] PublicadorTransacao - [Observer] falha em PublicadorTransacaoTest$$Lambda/0x000000003a30e800 | causa: IllegalStateException: quebrou
+2026-11-24 20:37:08.916 [DEBUG] [main] OrcamentoObserver - [Observer] reavaliando orcamentos afetados pela transacao id=1
+2026-11-24 20:37:08.922 [DEBUG] [main] OrcamentoObserver - [Observer] reavaliando orcamentos afetados pela transacao id=1
+2026-11-24 20:37:08.927 [DEBUG] [main] OrcamentoObserver - [Observer] reavaliando orcamentos afetados pela transacao id=1
+2026-11-24 20:37:08.947 [DEBUG] [main] OrcamentoObserver - [Observer] reavaliando orcamentos afetados pela transacao id=1
+2026-11-24 20:37:08.948 [DEBUG] [main] OrcamentoObserver - [Observer] reavaliando orcamentos afetados pela transacao id=1
